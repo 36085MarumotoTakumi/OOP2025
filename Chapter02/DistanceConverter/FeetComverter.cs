@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DistanceConverter
-{
+{ 
     public class FeetComverter
     {
         public double FromMeter(double meter) {
