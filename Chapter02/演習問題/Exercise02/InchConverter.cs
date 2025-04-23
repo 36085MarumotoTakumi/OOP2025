@@ -12,5 +12,8 @@ namespace Exercise02 {
         public static double ToMeter(double feet) {
             return feet * ratio;
         }
+        public static double FromMeter(double meter) {
+            return meter / ratio;
+        }
     }
 }
