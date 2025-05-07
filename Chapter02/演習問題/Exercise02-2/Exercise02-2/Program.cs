@@ -15,14 +15,14 @@ namespace Exercise022 {
             Console.WriteLine("おわりの数値:");
             int end = int.Parse(Console.ReadLine());
 
-            if (a == 2) {
+            if (a == 1) {
                 //メートルからヤードへの変換
                 for (int yard = start; yard <= end; yard++) {
                     double meter = YardConverter.ToYard(yard);
                     Console.WriteLine($"{yard}yard={meter:0.0000}m");
                 }
             }
-            if (a == 1) {
+            if (a == 2) {
                 //ヤードからメートルの変換
                 for (int meter = start; meter <= end; meter++) {
                     double yard = YardConverter.FromYard(meter);
