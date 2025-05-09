@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO.Pipes;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SalesCalculator
+{
+    //売上集計クラス
+   public class SalesCounter{
+        private readonly List<Sale> _sales;
+        //コンストラクタ
+        public SalesCounter(List<Sale> sales) {
+            _sales = sales;
+        }
+        //店舗別売上
+        public Dictionary<string,int> GetPerstoreSales() {
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+            foreach(Sale sale in _sales) {
+                if (dict.ContainsKey(sale.ShopName))
+                    dict[sale.ShopName] += sale.Amount;
+                else
+                    dict[sale.ShopName] = sale.Amount;
+            }
+            return dict;
+        }
+    }
+}
