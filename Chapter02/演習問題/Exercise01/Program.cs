@@ -1,4 +1,6 @@
-﻿namespace Exercise01 {
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Exercise01 {
     internal class Program {
         static void Main(string[] args) {
             //2.1.3
@@ -9,9 +11,18 @@
                 new Song("Honesty", "Billy Joel", 231),
                 new Song("I Will Always Love You", "Whitney Houston", 273),
             };
+            printSongs(songs);
         }
         //2.1.4
         private static void printSongs(Song[] songs) {
+            foreach(var song in songs) {
+                var minutes = song.Length / 60;
+                var seconds = song.Length & 60;
+                Console.WriteLine($"{song.Title},{song.ArtistName},{minutes}{seconds:00}");
+            }
         }
-    
+    }
+}
+
+
 
