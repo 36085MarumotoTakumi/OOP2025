@@ -26,17 +26,7 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_1( List<string> cities) {
-            {
-                while(true) {
-                    Console.WriteLine("都市名を入力。空白にしたら終了");
-                    var cit1 = Console.ReadLine();
-                    if (string.IsNullOrEmpty(cit1)) {
-                        break;
-                    }
-                    int index = cities.FindIndex(s => s == cit1);
-                    Console.WriteLine(index);
-                }
-            }
+            Console.WriteLine(index);
         }
         private static void Exercise2_2(List<string> cities) {
             
