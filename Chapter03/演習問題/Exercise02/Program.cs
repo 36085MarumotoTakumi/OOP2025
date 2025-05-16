@@ -38,7 +38,6 @@ namespace Exercise02 {
                 }
             }
         }
-
         private static void Exercise2_2(List<string> cities) {
             
         }
