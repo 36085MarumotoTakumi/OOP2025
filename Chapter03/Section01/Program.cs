@@ -2,26 +2,20 @@
     internal class Program {
         public delegate bool Judgement(int value);
         static void Main(string[] args) {
-            //Console.Write("カウントしたい数値:");
-            //int num = int.Parse(Console.ReadLine());
+            var cities = new List<string> {
+            "Tokyo",
+            "New Delhi",
+            "Bangkok",
+            "London",
+            "Paris",
+            "Berlin",
+            "Canberra",
+            "Hong Kong",
+        };
+            var lowerList = cities.ConvertAll(s => s.ToLower());
+            lowerList.ForEach(s => Console.WriteLine(s));
 
-            var numbers = new[] { 5, 3, 9, 6, 7, 5, 8, 1, 0, 5, 10, 4 };
 
-            Console.WriteLine(Count(numbers, n => n <= n && n < 10));
-        }
-        //メソッドへ渡す処理
-        static bool isEven(int n) {
-            return n % 2 == 0;
-        }
-        static int Count(int[] numbers, Func<int, bool> judge) {
-            var count = 0;
-            foreach (var n in numbers) {
-                //引数で受け取ったメソッドを呼び出す
-                if (judge(n) == true) {
-                    count++;
-                }
-            }
-            return count;
         }
     }
 }
