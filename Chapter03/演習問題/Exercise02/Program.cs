@@ -1,4 +1,5 @@
 ﻿
+
 namespace Exercise02 {
     internal class Program {
         static void Main(string[] args) {
@@ -22,39 +23,31 @@ namespace Exercise02 {
             Console.WriteLine("***** 3.2.4 *****");
             Exercise2_4(cities);
             Console.WriteLine();
-
         }
 
-        private static void Exercise2_1(List<string> cities) {
-            {
-                while (true) {
-                    Console.WriteLine("都市名を入力。空白にしたら終了");
-                    var cit1 = Console.ReadLine();
-                    if (string.IsNullOrEmpty(cit1)) {
-                        break;
-                    }
-                    int index = cities.FindIndex(s => s == cit1);
-                    Console.WriteLine(index);
-                }
-            }
-        }
-        private static void Exercise2_2(List<string> cities) {
-            Console.WriteLine(cities.Count(s => s.Contains('o')));
+        private static void Exercise2_1(List<string> names) {
+            Console.WriteLine("都市名を入力。空行で終了");
+            do {
+                var name = Console.ReadLine();  //入力処理
+                if (string.IsNullOrEmpty(name)) 
+                    break;
+                int index = names.FindIndex(s => s.Equals(name));
+                Console.WriteLine(index);
+            } while (true);
         }
 
-        private static void Exercise2_3(List<string> cities) {
-            var selected = cities.Where(s => s.Contains('o')).ToArray();
-            foreach (var name in selected) {
-                Console.WriteLine(name);
-            }
+        private static void Exercise2_2(List<string> names) {
+        
+            //ヒント
+           // names.Count( ここにラムダ式を記述する )
+        }
+
+        private static void Exercise2_3(List<string> names) {
+        
         }
 
         private static void Exercise2_4(List<string> names) {
-            var selected = names.Where(s => s.StartsWith('B'))
-                                .Select(s=>s.Length);
-            foreach (var count in selected) {
-                Console.WriteLine(count);
-            }
+        
         }
     }
 }
