@@ -1,4 +1,5 @@
 ﻿
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Exercise03 {
@@ -21,6 +22,9 @@ namespace Exercise03 {
             Console.WriteLine("6.3.5");
             Exercise5(text);
 
+            Console.WriteLine("6.3.99");
+            Exercise6(text);
+
         }
 
         private static void Exercise1(string text) {
@@ -34,8 +38,8 @@ namespace Exercise03 {
         private static void Exercise3(string text) {
             var words = text.Split(new[] { "  " }, StringSplitOptions.TrimEntries);
             StringBuilder sbtext = new StringBuilder();
-            for (int i = 0; i < words.Count(); i++) {
-                sbtext.Append(words[i]);
+            foreach (var item in words) {
+                sbtext.Append(item);
             }
             Console.WriteLine(sbtext);
         }
@@ -51,6 +55,14 @@ namespace Exercise03 {
                 if (fwords[i].Length <= 4) {
                     Console.WriteLine(fwords[i]);
                 }
+
+            }
+
+        }
+        private static void Exercise6(string text) {
+            for (int i = 1; i < 26; i++) {
+                var abc = (char)('a' + i - 1);
+                Console.WriteLine(abc + ":" + text.Where(z => z == abc).Count());
             }
         }
     }
