@@ -13,6 +13,7 @@ namespace Section01 {
         }
     }
     class MySample {
+
         public ImmutableList<int> MyList { get; private set; }
 
         public MySample() {
