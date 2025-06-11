@@ -60,7 +60,7 @@ namespace Exercise03 {
 
         }
         private static void Exercise6(string text) {
-            for (int i = 1; i < 26; i++) {
+            for (int i = 1; i < 27; i++) {
                 var abc = (char)('a' + i - 1);
                 Console.WriteLine(abc + ":" + text.Where(z => z == abc).Count());
             }
