@@ -14,7 +14,7 @@ namespace Exercise01 {
         }
 
         private static void Exercise1(string text) {
-            var dict = new SortedDictionary<char, int>();
+            var dict = new Dictionary<char, int>();
 
             foreach (var ch in text.ToUpper()) {
                 if ('A' <= ch && ch <= 'Z') {
@@ -34,7 +34,21 @@ namespace Exercise01 {
 
 
         private static void Exercise2(string text) {
+            var dict = new SortedDictionary<char, int>();
 
+            foreach (var ch in text.ToUpper()) {
+                if ('A' <= ch && ch <= 'Z') {
+                    if (dict.ContainsKey(ch)) {
+                        dict[ch]++;
+                    } else {
+                        dict[ch] = 1;
+                    }
+                }
+            }
+
+            for (char c = 'A'; c <= 'Z'; c++) {
+                Console.WriteLine($"{c}: {(dict.ContainsKey(c) ? dict[c] : 0)}");
+            }
         }
     }
 }
