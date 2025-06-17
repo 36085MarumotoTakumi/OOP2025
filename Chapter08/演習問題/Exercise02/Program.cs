@@ -3,6 +3,8 @@
         static void Main(string[] args) {
             // コンストラクタの呼び出し
             var abbrs = new Abbreviations();
+            var count = abbrs.Count;
+            Console.WriteLine("単語数:" + abbrs.Count);
 
             // Addメソッドの呼び出し例
             abbrs.Add("IOC", "国際オリンピック委員会");
@@ -19,6 +21,13 @@
                 }
             }
             Console.WriteLine();
+            if (abbrs.Remove("NPT")) {
+                Console.WriteLine(abbrs.Count);
+            }
+            if (!abbrs.Remove("NPT")) {
+                Console.WriteLine("削除できません");
+            }
+            var query = abbrs.GetAll().Where(x => x.Key.Length == 3);
 
             // ToAbbreviationメソッドの利用例
             var japanese = "東南アジア諸国連合";
@@ -35,6 +44,8 @@
                 Console.WriteLine($"{key}={value}");
             }
             Console.WriteLine();
+
+
         }
     }
 }
