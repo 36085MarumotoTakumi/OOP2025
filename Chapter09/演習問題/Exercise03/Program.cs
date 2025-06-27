@@ -4,7 +4,7 @@
             var tw = new TimeWatch();
             tw.Start();
             // スリープする
-            Thread.Sleep(893);
+            Thread.Sleep(1);
             TimeSpan duration = tw.Stop();
             Console.WriteLine("処理時間は{0}ミリ秒でした", duration.TotalMilliseconds);
 
