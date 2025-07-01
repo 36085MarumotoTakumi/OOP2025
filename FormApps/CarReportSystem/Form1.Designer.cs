@@ -31,10 +31,10 @@
             label6 = new Label();
             label7 = new Label();
             dtpDate = new DateTimePicker();
-            comboBox1 = new ComboBox();
+            cbAuthor = new ComboBox();
             groupBox1 = new GroupBox();
             rdOther = new RadioButton();
-            rbYUNYU = new RadioButton();
+            rdYUNYU = new RadioButton();
             rdHONDA = new RadioButton();
             rdSUZUKI = new RadioButton();
             rdSUBARU = new RadioButton();
@@ -134,19 +134,19 @@
             dtpDate.Size = new Size(200, 35);
             dtpDate.TabIndex = 7;
             // 
-            // comboBox1
+            // cbAuthor
             // 
-            comboBox1.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(132, 105);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(197, 33);
-            comboBox1.TabIndex = 8;
+            cbAuthor.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            cbAuthor.FormattingEnabled = true;
+            cbAuthor.Location = new Point(132, 105);
+            cbAuthor.Name = "cbAuthor";
+            cbAuthor.Size = new Size(197, 33);
+            cbAuthor.TabIndex = 8;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(rdOther);
-            groupBox1.Controls.Add(rbYUNYU);
+            groupBox1.Controls.Add(rdYUNYU);
             groupBox1.Controls.Add(rdHONDA);
             groupBox1.Controls.Add(rdSUZUKI);
             groupBox1.Controls.Add(rdSUBARU);
@@ -170,16 +170,16 @@
             rdOther.Text = "その他";
             rdOther.UseVisualStyleBackColor = true;
             // 
-            // rbYUNYU
+            // rdYUNYU
             // 
-            rbYUNYU.AutoSize = true;
-            rbYUNYU.Location = new Point(203, 11);
-            rbYUNYU.Name = "rbYUNYU";
-            rbYUNYU.Size = new Size(61, 19);
-            rbYUNYU.TabIndex = 6;
-            rbYUNYU.TabStop = true;
-            rbYUNYU.Text = "輸入車";
-            rbYUNYU.UseVisualStyleBackColor = true;
+            rdYUNYU.AutoSize = true;
+            rdYUNYU.Location = new Point(203, 11);
+            rdYUNYU.Name = "rdYUNYU";
+            rdYUNYU.Size = new Size(61, 19);
+            rdYUNYU.TabIndex = 6;
+            rdYUNYU.TabStop = true;
+            rdYUNYU.Text = "輸入車";
+            rdYUNYU.UseVisualStyleBackColor = true;
             // 
             // rdHONDA
             // 
@@ -271,6 +271,7 @@
             dgvRecord.Name = "dgvRecord";
             dgvRecord.Size = new Size(568, 150);
             dgvRecord.TabIndex = 12;
+            dgvRecord.Click += dgvRecord_Click;
             // 
             // pbPictures
             // 
@@ -299,6 +300,7 @@
             btDelete.TabIndex = 15;
             btDelete.Text = "削除";
             btDelete.UseVisualStyleBackColor = true;
+            btDelete.Click += btDelete_Click;
             // 
             // btRecordAdd
             // 
@@ -348,7 +350,7 @@
             Controls.Add(tbReport);
             Controls.Add(cbCarName);
             Controls.Add(groupBox1);
-            Controls.Add(comboBox1);
+            Controls.Add(cbAuthor);
             Controls.Add(dtpDate);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -377,7 +379,7 @@
         private Label label6;
         private Label label7;
         private DateTimePicker dtpDate;
-        private ComboBox comboBox1;
+        private ComboBox cbAuthor;
         private GroupBox groupBox1;
         private RadioButton rdNISSAN;
         private RadioButton rdMAZDA;
@@ -394,7 +396,7 @@
         private Button btRecordAdd;
         private Button btRecordModifi;
         private Button btRecordDelete;
-        private RadioButton rbYUNYU;
+        private RadioButton rdYUNYU;
         private RadioButton rdOther;
         private OpenFileDialog ofdPicFileOpen;
     }
