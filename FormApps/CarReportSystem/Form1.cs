@@ -1,4 +1,6 @@
+using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using static CarReportSystem.CarReport;
 
 namespace CarReportSystem {
@@ -17,36 +19,63 @@ namespace CarReportSystem {
 
 
         private void btRecordAdd_Click(object sender, EventArgs e) {
-            var carReport = new CarReport {
-                Date = dtpDate.Value,
-                Author = cbAuthor.Text,
-                CarName = cbCarName.Text,
-                Maker = GetRadioButtonMaker(),
-                Picture = pbPictures.Image,
-                Report = tbReport.Text,
-            };
-            listCarReports.Add(carReport);
-            setCbAuthor();
-            setCbCarName();
-            InputItemsAllClear();
+            if (cbCarName.Text == String.Empty || cbAuthor.Text == String.Empty) {
+                tsslbMessage.Text = ("記録者、または車名が未入力です");
+
+            } else {
+                var carReport = new CarReport {
+                    Date = dtpDate.Value,
+                    Author = cbAuthor.Text,
+                    CarName = cbCarName.Text,
+                    Maker = GetRadioButtonMaker(),
+                    Picture = pbPictures.Image,
+                    Report = tbReport.Text,
+                };
+                listCarReports.Add(carReport);
+                setCbAuthor();
+                setCbCarName();
+                InputItemsAllClear();
+            }
         }
 
         private void setCbCarName() {
-            if (true) {
+            if (!cbCarName.Items.Contains(cbCarName.Text)) {
                 cbCarName.Items.Add(cbCarName.Text);
-            } 
+            }
         }
 
         private void setCbAuthor() {
-            if (true) {
+            if (!cbAuthor.Items.Contains(cbAuthor.Text)) {
                 cbAuthor.Items.Add(cbAuthor.Text);
             }
         }
 
 
-        private void btRecordDelete_Click(object sender, EventArgs e) {
 
+        private void btRecordModifi_Click(object sender, EventArgs e) {
+            if (dgvRecord.Rows.Count == 0) return;
+            listCarReports[dgvRecord.CurrentRow.Index].Date = dtpDate.Value;
+            listCarReports[dgvRecord.CurrentRow.Index].Author = cbAuthor.Text;
+            listCarReports[dgvRecord.CurrentRow.Index].CarName = cbCarName.Text;
+            listCarReports[dgvRecord.CurrentRow.Index].Maker = GetRadioButtonMaker();
+            listCarReports[dgvRecord.CurrentRow.Index].Picture = pbPictures.Image;
+            listCarReports[dgvRecord.CurrentRow.Index].Report = tbReport.Text;
+
+            dgvRecord.Refresh();
         }
+
+        private void btRecordDelete_Click(object sender, EventArgs e) {
+            if ((dgvRecord.CurrentRow == null)
+                || (!dgvRecord.CurrentRow.Selected)) return;
+            int index = dgvRecord.CurrentRow.Index;
+            listCarReports.RemoveAt(index);
+        }
+
+
+
+
+
+
 
         private void InputItemsAllClear() {
             dtpDate.Value = DateTime.Today;
@@ -78,7 +107,6 @@ namespace CarReportSystem {
             } else {
                 return CarReport.MakerGroup.なし;
             }
-            return GetRadioButtonMaker();
         }
         private void dgvRecord_Click(object sender, EventArgs e) {
             dtpDate.Value = (DateTime)dgvRecord.CurrentRow.Cells["Date"].Value;
@@ -119,8 +147,37 @@ namespace CarReportSystem {
             }
         }
 
+        private void dgvRecord_CellContentClick(object sender, DataGridViewCellEventArgs e) {
 
 
+        }
 
+        private void ファイルToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void tsmiExit_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
+        private void tsmiAbout_Click(object sender, EventArgs e) {
+            FmVersion FmVersion = new FmVersion();
+            FmVersion.Show();
+        }
+
+        private void CBColor_Click(object sender, EventArgs e) {
+            ColorDialog cd = new ColorDialog();
+            if (cd.ShowDialog() == DialogResult.OK) {
+                this.BackColor = cd.Color;
+            }
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            InputItemsAllClear();
+            dgvRecord.RowsDefaultCellStyle.BackColor = Color.SkyBlue;
+            dgvRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.Yellow;
+
+        }
     }
 }
