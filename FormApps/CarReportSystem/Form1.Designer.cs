@@ -56,14 +56,16 @@
             tsslbMessage = new ToolStripStatusLabel();
             menuStrip1 = new MenuStrip();
             ファイルToolStripMenuItem = new ToolStripMenuItem();
-            開くToolStripMenuItem = new ToolStripMenuItem();
-            保存ToolStripMenuItem = new ToolStripMenuItem();
+            OpenReportFile = new ToolStripMenuItem();
+            SaveReportFile = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             CBColor = new ToolStripMenuItem();
             tsmiExit = new ToolStripMenuItem();
             ヘルプHToolStripMenuItem = new ToolStripMenuItem();
             tsmiAbout = new ToolStripMenuItem();
             colorDialog1 = new ColorDialog();
+            sfdReportSaveFile = new SaveFileDialog();
+            ofdReportOpenFile = new OpenFileDialog();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecord).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPictures).BeginInit();
@@ -285,6 +287,7 @@
             dgvRecord.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRecord.Location = new Point(132, 368);
             dgvRecord.Name = "dgvRecord";
+            dgvRecord.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvRecord.Size = new Size(568, 150);
             dgvRecord.TabIndex = 12;
             dgvRecord.CellContentClick += dgvRecord_CellContentClick;
@@ -388,33 +391,35 @@
             // 
             // ファイルToolStripMenuItem
             // 
-            ファイルToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 開くToolStripMenuItem, 保存ToolStripMenuItem, toolStripSeparator1, CBColor, tsmiExit });
+            ファイルToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenReportFile, SaveReportFile, toolStripSeparator1, CBColor, tsmiExit });
             ファイルToolStripMenuItem.Name = "ファイルToolStripMenuItem";
             ファイルToolStripMenuItem.Size = new Size(67, 20);
             ファイルToolStripMenuItem.Text = "ファイル(&F)";
             ファイルToolStripMenuItem.Click += ファイルToolStripMenuItem_Click;
             // 
-            // 開くToolStripMenuItem
+            // OpenReportFile
             // 
-            開くToolStripMenuItem.Name = "開くToolStripMenuItem";
-            開くToolStripMenuItem.Size = new Size(140, 22);
-            開くToolStripMenuItem.Text = "開く";
+            OpenReportFile.Name = "OpenReportFile";
+            OpenReportFile.Size = new Size(180, 22);
+            OpenReportFile.Text = "開く";
+            OpenReportFile.Click += OpenReportFile_Click;
             // 
-            // 保存ToolStripMenuItem
+            // SaveReportFile
             // 
-            保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            保存ToolStripMenuItem.Size = new Size(140, 22);
-            保存ToolStripMenuItem.Text = "保存...";
+            SaveReportFile.Name = "SaveReportFile";
+            SaveReportFile.Size = new Size(180, 22);
+            SaveReportFile.Text = "保存...";
+            SaveReportFile.Click += SaveReportFile_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(137, 6);
+            toolStripSeparator1.Size = new Size(177, 6);
             // 
             // CBColor
             // 
             CBColor.Name = "CBColor";
-            CBColor.Size = new Size(140, 22);
+            CBColor.Size = new Size(180, 22);
             CBColor.Text = "色設定...";
             CBColor.Click += CBColor_Click;
             // 
@@ -422,7 +427,7 @@
             // 
             tsmiExit.Name = "tsmiExit";
             tsmiExit.ShortcutKeys = Keys.Alt | Keys.F4;
-            tsmiExit.Size = new Size(140, 22);
+            tsmiExit.Size = new Size(180, 22);
             tsmiExit.Text = "終了";
             tsmiExit.Click += tsmiExit_Click;
             // 
@@ -439,6 +444,10 @@
             tsmiAbout.Size = new Size(155, 22);
             tsmiAbout.Text = "このアプリについて";
             tsmiAbout.Click += tsmiAbout_Click;
+            // 
+            // ofdReportOpenFile
+            // 
+            ofdReportOpenFile.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -473,6 +482,7 @@
             Name = "Form1";
             Text = "試乗レポート";
             Load += Form1_Load;
+            FormClosed += Form1_FormClosed;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecord).EndInit();
@@ -522,11 +532,13 @@
         private ToolStripMenuItem ファイルToolStripMenuItem;
         private ToolStripMenuItem ヘルプHToolStripMenuItem;
         private ToolStripMenuItem tsmiAbout;
-        private ToolStripMenuItem 開くToolStripMenuItem;
-        private ToolStripMenuItem 保存ToolStripMenuItem;
+        private ToolStripMenuItem OpenReportFile;
+        private ToolStripMenuItem SaveReportFile;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem CBColor;
         private ToolStripMenuItem tsmiExit;
         private ColorDialog colorDialog1;
+        private SaveFileDialog sfdReportSaveFile;
+        private OpenFileDialog ofdReportOpenFile;
     }
 }

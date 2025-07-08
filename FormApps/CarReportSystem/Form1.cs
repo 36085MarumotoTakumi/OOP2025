@@ -1,11 +1,18 @@
 using System;
 using System.ComponentModel;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 using static CarReportSystem.CarReport;
+using System.Xml;
+
 
 namespace CarReportSystem {
+    [Serializable]
     public partial class Form1 : Form {
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
+
+        Settings settings = new Settings();
 
         public Form1() {
             InitializeComponent();
@@ -169,6 +176,9 @@ namespace CarReportSystem {
             ColorDialog cd = new ColorDialog();
             if (cd.ShowDialog() == DialogResult.OK) {
                 this.BackColor = cd.Color;
+
+                settings.MainFormColor = cd.Color.ToArgb();
+
             }
 
         }
@@ -178,6 +188,65 @@ namespace CarReportSystem {
             dgvRecord.RowsDefaultCellStyle.BackColor = Color.SkyBlue;
             dgvRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.Yellow;
 
+        }
+
+
+        private void reportOpenFile() {
+            if (ofdReportOpenFile.ShowDialog() == DialogResult.OK) {
+                try {
+#pragma warning disable SYSLIB0011
+                    var bf = new BinaryFormatter();
+#pragma warning restore SYSLIB0011
+
+                    using (FileStream fs = File.Open(
+                        ofdReportOpenFile.FileName, FileMode.Open, FileAccess.Read)) {
+
+                        listCarReports = (BindingList<CarReport>)bf.Deserialize(fs);
+                        dgvRecord.DataSource = listCarReports;
+                        foreach (var report in listCarReports) {
+                           // setCbAuthor(report.Author);
+                           // setCbCarName(report.CarName);
+                        }
+                    }
+                }
+                catch (Exception ex) {
+                    tsslbMessage.Text = "ファイル読み込みエラー";
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void reportSaveFile() {
+
+            if (sfdReportSaveFile.ShowDialog() == DialogResult.OK) {
+                try {
+#pragma warning disable SYSLIB0011
+                    var bf = new BinaryFormatter();
+#pragma warning restore SYSLIB0011
+
+                    using (FileStream fs = File.Open(
+                        sfdReportSaveFile.FileName, FileMode.Create)) {
+
+                        bf.Serialize(fs, listCarReports);
+                    }
+                }
+                catch (Exception ex) {
+                    tsslbMessage.Text = "ファイル書き出しエラー";
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void SaveReportFile_Click(object sender, EventArgs e) {
+            reportSaveFile();
+        }
+
+        private void OpenReportFile_Click(object sender, EventArgs e) {
+            reportOpenFile();
+        }
+        private void Form1_FormClosed(object sender, EventArgs e) {
+
+            XmlWriter.Create("settings.xml");
         }
     }
 }

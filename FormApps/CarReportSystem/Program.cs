@@ -1,4 +1,6 @@
+using System.Runtime.Serialization;
 namespace CarReportSystem {
+    [Serializable]
     internal static class Program {
         /// <summary>
         ///  The main entry point for the application.
