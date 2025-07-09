@@ -33,12 +33,12 @@
 
         //メソッドの概要： 
         public IDictionary<string, int> GetPerstoreScore() {
-            var dict = new SortedDictionary<string, int>();
+            var dict = new Dictionary<string, int>();
             foreach (var score in _score) {
                 if (dict.ContainsKey(score.Name)) {
-                    dict[score.Subject] += score.Score;
+                    dict[score.Name] += score.Score;
                 } else {
-                    dict[score.Subject] = score.Score;
+                    dict[score.Name] = score.Score;
                 }
             }
             return dict;
