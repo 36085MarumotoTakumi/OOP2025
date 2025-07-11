@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using static CarReportSystem.CarReport;
 using System.Xml;
+using System.Xml.Serialization;
 
 
 namespace CarReportSystem {
@@ -39,21 +40,21 @@ namespace CarReportSystem {
                     Report = tbReport.Text,
                 };
                 listCarReports.Add(carReport);
-                setCbAuthor();
-                setCbCarName();
+                setCbAuthor(cbAuthor.Text);
+                setCbCarName(cbCarName.Text);
                 InputItemsAllClear();
             }
         }
 
-        private void setCbCarName() {
+        private void setCbCarName(string carName) {
             if (!cbCarName.Items.Contains(cbCarName.Text)) {
-                cbCarName.Items.Add(cbCarName.Text);
+                cbCarName.Items.Add(carName);
             }
         }
 
-        private void setCbAuthor() {
+        private void setCbAuthor(string author) {
             if (!cbAuthor.Items.Contains(cbAuthor.Text)) {
-                cbAuthor.Items.Add(cbAuthor.Text);
+                cbAuthor.Items.Add(author);
             }
         }
 
@@ -187,7 +188,22 @@ namespace CarReportSystem {
             InputItemsAllClear();
             dgvRecord.RowsDefaultCellStyle.BackColor = Color.SkyBlue;
             dgvRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.Yellow;
-
+            if (File.Exists("settings.xml")) {
+                try {
+                    using (StreamReader sr = new StreamReader("settings.xml")) {
+                        var serializer = new XmlSerializer(typeof(Settings));
+                        var set = serializer.Deserialize(sr) as Settings;
+                        BackColor = Color.FromArgb(set.MainFormColor);
+                    }
+                }
+                catch (Exception ex) {
+                    
+                    MessageBox.Show(ex.Message);
+                }
+            } else {
+                tsslbMessage.Text = "ê›íËÉtÉ@ÉCÉãÇ™Ç†ÇËÇ‹ÇπÇÒ";
+            }
+          
         }
 
 
@@ -201,12 +217,14 @@ namespace CarReportSystem {
                     using (FileStream fs = File.Open(
                         ofdReportOpenFile.FileName, FileMode.Open, FileAccess.Read)) {
 
+
                         listCarReports = (BindingList<CarReport>)bf.Deserialize(fs);
                         dgvRecord.DataSource = listCarReports;
                         foreach (var report in listCarReports) {
-                           // setCbAuthor(report.Author);
-                           // setCbCarName(report.CarName);
+                            setCbAuthor(report.Author);
+                            setCbCarName(report.CarName);
                         }
+
                     }
                 }
                 catch (Exception ex) {
@@ -246,7 +264,18 @@ namespace CarReportSystem {
         }
         private void Form1_FormClosed(object sender, EventArgs e) {
 
-            XmlWriter.Create("settings.xml");
+            var setting = new Settings {
+                MainFormColor = BackColor.ToArgb()
+            };
+            try {
+                using (var writter = XmlWriter.Create("Settings.xml")) {
+                    var serializer = new XmlSerializer(setting.GetType());
+                    serializer.Serialize(writter, setting);
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
