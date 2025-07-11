@@ -13,7 +13,7 @@ namespace CarReportSystem {
     public partial class Form1 : Form {
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
 
-        Settings settings = new Settings();
+        Settings settings = Settings.getInstance();
 
         public Form1() {
             InitializeComponent();
@@ -197,13 +197,13 @@ namespace CarReportSystem {
                     }
                 }
                 catch (Exception ex) {
-                    
+
                     MessageBox.Show(ex.Message);
                 }
             } else {
                 tsslbMessage.Text = "ê›íËÉtÉ@ÉCÉãÇ™Ç†ÇËÇ‹ÇπÇÒ";
             }
-          
+
         }
 
 
@@ -264,9 +264,8 @@ namespace CarReportSystem {
         }
         private void Form1_FormClosed(object sender, EventArgs e) {
 
-            var setting = new Settings {
-                MainFormColor = BackColor.ToArgb()
-            };
+            var setting = Settings.getInstance();
+            settings.MainFormColor = BackColor.ToArgb();
             try {
                 using (var writter = XmlWriter.Create("Settings.xml")) {
                     var serializer = new XmlSerializer(setting.GetType());
