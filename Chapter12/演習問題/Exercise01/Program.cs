@@ -30,6 +30,7 @@ namespace Exercise01 {
                 },
             ];
             Serialize("employees.json", employees);
+            Deserialize_f("employees.json");
         }
         //問題12.1.1
         static string Serialize(Employee emp) {
@@ -49,14 +50,31 @@ namespace Exercise01 {
         //問題12.1.2
         //シリアル化してファイルへ出力する
         static void Serialize(string filePath, IEnumerable<Employee> employees) {
-            
+            var options = new JsonSerializerOptions {
+                WriteIndented = true,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
+            string jsonString = JsonSerializer.Serialize(employees, options);
+            File.WriteAllText("employees.json", jsonString);
         }
 
-
+        //問題12.1.3
+        //逆シリアル化して文字を出力する
+        static Employee[] Deserialize_f(string filePath) {
+            var options = new JsonSerializerOptions {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                WriteIndented = true,
+            };
+            var text = File.ReadAllText(filePath);
+            var employees = JsonSerializer.Deserialize<Employee[]>(text,options);
+            return employees;
+        }
     }
-    public record Employee {
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public DateTime HireDate { get; set; }
-    }
+}
+public record Employee {
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public DateTime HireDate { get; set; }
 }
