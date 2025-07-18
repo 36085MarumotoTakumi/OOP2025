@@ -1,4 +1,7 @@
+using System;
 using System.Net;
+using System.Security.Policy;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace RssReader {
@@ -10,19 +13,46 @@ namespace RssReader {
             InitializeComponent();
         }
 
-        private void btRssGet_Click(object sender, EventArgs e) {
-            using (var wc = new WebClient()) {
-                var url = wc.OpenRead(tbUrl.Text);
-                XDocument xdoc = XDocument.Load(url);//RSS�̎擾
+        private async void btRssGet_Click(object sender, EventArgs e) {
+            try {
+                using (var hc = new HttpClient()) {
 
-                items = xdoc.Root.Descendants("item").Select(x =>
-                new ItemData {
-                    Title = (string)x.Element("title"),
-                }).ToList();
-                    foreach (var item in items) {
-                        lbTitles.Items.Add(item.Title);
-                    }
+                    XDocument xdoc = XDocument.Parse(await hc.GetStringAsync(tbUrl.Text));
+                    //var url = hc.OpenRead(tbUrl.Text);
+                    //XDocument xdoc = XDocument.Load(url);//RSS�̎擾
+
+                    items = xdoc.Root.Descendants("item").Select(x =>
+                    new ItemData {
+                        Title = (string)x.Element("title"),
+                        link = (string)x.Element("link"),
+                    }).ToList();
+
+                    cbTitles.Items.Clear();
+                    items.ForEach(item => cbTitles.Items.Add(item.Title));
+                }
+            }
+            catch {
             }
         }
+
+        private void cbTitles_SelectedIndexChanged(object sender, EventArgs e) {
+
+            var selectitem = cbTitles.SelectedItem;
+            foreach (var item in items) {
+                if (item.Title == selectitem) {
+                    webView21.Source = new Uri(item.link);
+                }
+            }
+        }
+
+
+        private void Back_Click(object sender, EventArgs e) {
+            webView21.GoBack();
+        }
+
+        private void Move_Click(object sender, EventArgs e) {
+            webView21.GoForward();
+        }
+
     }
 }

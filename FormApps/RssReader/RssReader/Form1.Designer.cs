@@ -25,7 +25,11 @@
         private void InitializeComponent() {
             tbUrl = new TextBox();
             btRssGet = new Button();
-            lbTitles = new ListBox();
+            webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
+            Back = new Button();
+            Move = new Button();
+            cbTitles = new ComboBox();
+            ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             SuspendLayout();
             // 
             // tbUrl
@@ -45,26 +49,61 @@
             btRssGet.UseVisualStyleBackColor = true;
             btRssGet.Click += btRssGet_Click;
             // 
-            // lbTitles
+            // webView21
             // 
-            lbTitles.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            lbTitles.FormattingEnabled = true;
-            lbTitles.ItemHeight = 15;
-            lbTitles.Location = new Point(12, 41);
-            lbTitles.Name = "lbTitles";
-            lbTitles.Size = new Size(516, 409);
-            lbTitles.TabIndex = 2;
+            webView21.AllowExternalDrop = true;
+            webView21.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            webView21.CreationProperties = null;
+            webView21.DefaultBackgroundColor = Color.White;
+            webView21.Location = new Point(12, 99);
+            webView21.Name = "webView21";
+            webView21.Size = new Size(516, 387);
+            webView21.TabIndex = 3;
+            webView21.ZoomFactor = 1D;
+            // 
+            // Back
+            // 
+            Back.Location = new Point(12, 70);
+            Back.Name = "Back";
+            Back.Size = new Size(75, 23);
+            Back.TabIndex = 4;
+            Back.Text = "Back";
+            Back.UseVisualStyleBackColor = true;
+            Back.Click += Back_Click;
+            // 
+            // Move
+            // 
+            Move.Location = new Point(93, 70);
+            Move.Name = "Move";
+            Move.Size = new Size(75, 23);
+            Move.TabIndex = 5;
+            Move.Text = "Forward";
+            Move.UseVisualStyleBackColor = true;
+            Move.Click += Move_Click;
+            // 
+            // cbTitles
+            // 
+            cbTitles.FormattingEnabled = true;
+            cbTitles.Location = new Point(12, 41);
+            cbTitles.Name = "cbTitles";
+            cbTitles.Size = new Size(435, 23);
+            cbTitles.TabIndex = 6;
+            cbTitles.SelectedIndexChanged += cbTitles_SelectedIndexChanged;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(544, 472);
-            Controls.Add(lbTitles);
+            ClientSize = new Size(544, 498);
+            Controls.Add(cbTitles);
+            Controls.Add(Move);
+            Controls.Add(Back);
+            Controls.Add(webView21);
             Controls.Add(btRssGet);
             Controls.Add(tbUrl);
             Name = "Form1";
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -73,6 +112,9 @@
 
         private TextBox tbUrl;
         private Button btRssGet;
-        private ListBox lbTitles;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
+        private Button Back;
+        private Button Move;
+        private ComboBox cbTitles;
     }
 }
