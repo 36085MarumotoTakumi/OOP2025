@@ -23,25 +23,20 @@
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            tbUrl = new TextBox();
             btRssGet = new Button();
             webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
             Back = new Button();
             Move = new Button();
             cbTitles = new ComboBox();
+            Reload = new Button();
+            cbUrl = new ComboBox();
+            Favorite = new Button();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             SuspendLayout();
             // 
-            // tbUrl
-            // 
-            tbUrl.Location = new Point(12, 12);
-            tbUrl.Name = "tbUrl";
-            tbUrl.Size = new Size(435, 23);
-            tbUrl.TabIndex = 0;
-            // 
             // btRssGet
             // 
-            btRssGet.Location = new Point(453, 12);
+            btRssGet.Location = new Point(696, 12);
             btRssGet.Name = "btRssGet";
             btRssGet.Size = new Size(75, 23);
             btRssGet.TabIndex = 1;
@@ -55,15 +50,15 @@
             webView21.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             webView21.CreationProperties = null;
             webView21.DefaultBackgroundColor = Color.White;
-            webView21.Location = new Point(12, 99);
+            webView21.Location = new Point(12, 70);
             webView21.Name = "webView21";
-            webView21.Size = new Size(516, 387);
+            webView21.Size = new Size(759, 416);
             webView21.TabIndex = 3;
             webView21.ZoomFactor = 1D;
             // 
             // Back
             // 
-            Back.Location = new Point(12, 70);
+            Back.Location = new Point(12, 12);
             Back.Name = "Back";
             Back.Size = new Size(75, 23);
             Back.TabIndex = 4;
@@ -73,7 +68,7 @@
             // 
             // Move
             // 
-            Move.Location = new Point(93, 70);
+            Move.Location = new Point(174, 12);
             Move.Name = "Move";
             Move.Size = new Size(75, 23);
             Move.TabIndex = 5;
@@ -84,37 +79,68 @@
             // cbTitles
             // 
             cbTitles.FormattingEnabled = true;
-            cbTitles.Location = new Point(12, 41);
+            cbTitles.Location = new Point(255, 41);
             cbTitles.Name = "cbTitles";
             cbTitles.Size = new Size(435, 23);
             cbTitles.TabIndex = 6;
             cbTitles.SelectedIndexChanged += cbTitles_SelectedIndexChanged;
             // 
+            // Reload
+            // 
+            Reload.Location = new Point(93, 12);
+            Reload.Name = "Reload";
+            Reload.Size = new Size(75, 23);
+            Reload.TabIndex = 7;
+            Reload.Text = "Reload";
+            Reload.UseVisualStyleBackColor = true;
+            Reload.Click += Reload_Click;
+            // 
+            // cbUrl
+            // 
+            cbUrl.FormattingEnabled = true;
+            cbUrl.Location = new Point(255, 12);
+            cbUrl.Name = "cbUrl";
+            cbUrl.Size = new Size(435, 23);
+            cbUrl.TabIndex = 8;
+            // 
+            // Favorite
+            // 
+            Favorite.Location = new Point(12, 41);
+            Favorite.Name = "Favorite";
+            Favorite.Size = new Size(75, 23);
+            Favorite.TabIndex = 9;
+            Favorite.Text = "Favorite";
+            Favorite.UseVisualStyleBackColor = true;
+            Favorite.Click += Favorite_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(544, 498);
+            ClientSize = new Size(780, 498);
+            Controls.Add(Favorite);
+            Controls.Add(cbUrl);
+            Controls.Add(Reload);
             Controls.Add(cbTitles);
             Controls.Add(Move);
             Controls.Add(Back);
             Controls.Add(webView21);
             Controls.Add(btRssGet);
-            Controls.Add(tbUrl);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private TextBox tbUrl;
         private Button btRssGet;
         private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
         private Button Back;
         private Button Move;
         private ComboBox cbTitles;
+        private Button Reload;
+        private ComboBox cbUrl;
+        private Button Favorite;
     }
 }
