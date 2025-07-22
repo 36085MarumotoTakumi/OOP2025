@@ -27,10 +27,11 @@
             webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
             Back = new Button();
             Move = new Button();
-            cbTitles = new ComboBox();
             Reload = new Button();
             cbUrl = new ComboBox();
             Favorite = new Button();
+            lbTitles = new ListBox();
+            tbFavorite = new TextBox();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             SuspendLayout();
             // 
@@ -50,9 +51,9 @@
             webView21.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             webView21.CreationProperties = null;
             webView21.DefaultBackgroundColor = Color.White;
-            webView21.Location = new Point(12, 70);
+            webView21.Location = new Point(12, 81);
             webView21.Name = "webView21";
-            webView21.Size = new Size(759, 416);
+            webView21.Size = new Size(759, 452);
             webView21.TabIndex = 3;
             webView21.ZoomFactor = 1D;
             // 
@@ -75,15 +76,6 @@
             Move.Text = "Forward";
             Move.UseVisualStyleBackColor = true;
             Move.Click += Move_Click;
-            // 
-            // cbTitles
-            // 
-            cbTitles.FormattingEnabled = true;
-            cbTitles.Location = new Point(255, 41);
-            cbTitles.Name = "cbTitles";
-            cbTitles.Size = new Size(435, 23);
-            cbTitles.TabIndex = 6;
-            cbTitles.SelectedIndexChanged += cbTitles_SelectedIndexChanged;
             // 
             // Reload
             // 
@@ -113,15 +105,35 @@
             Favorite.UseVisualStyleBackColor = true;
             Favorite.Click += Favorite_Click;
             // 
+            // lbTitles
+            // 
+            lbTitles.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lbTitles.FormattingEnabled = true;
+            lbTitles.ItemHeight = 15;
+            lbTitles.Location = new Point(255, 41);
+            lbTitles.Name = "lbTitles";
+            lbTitles.RightToLeft = RightToLeft.No;
+            lbTitles.Size = new Size(435, 34);
+            lbTitles.TabIndex = 10;
+            lbTitles.SelectedIndexChanged += lbTitles_SelectedIndexChanged;
+            // 
+            // tbFavorite
+            // 
+            tbFavorite.Location = new Point(93, 41);
+            tbFavorite.Name = "tbFavorite";
+            tbFavorite.Size = new Size(156, 23);
+            tbFavorite.TabIndex = 11;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(780, 498);
+            ClientSize = new Size(780, 545);
+            Controls.Add(tbFavorite);
+            Controls.Add(lbTitles);
             Controls.Add(Favorite);
             Controls.Add(cbUrl);
             Controls.Add(Reload);
-            Controls.Add(cbTitles);
             Controls.Add(Move);
             Controls.Add(Back);
             Controls.Add(webView21);
@@ -131,6 +143,7 @@
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -138,9 +151,10 @@
         private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
         private Button Back;
         private Button Move;
-        private ComboBox cbTitles;
         private Button Reload;
         private ComboBox cbUrl;
         private Button Favorite;
+        private ListBox lbTitles;
+        private TextBox tbFavorite;
     }
 }
