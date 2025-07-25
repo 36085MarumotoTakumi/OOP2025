@@ -32,6 +32,7 @@
             Favorite = new Button();
             lbTitles = new ListBox();
             tbFavorite = new TextBox();
+            DeleteFavorite = new Button();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             SuspendLayout();
             // 
@@ -51,9 +52,9 @@
             webView21.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             webView21.CreationProperties = null;
             webView21.DefaultBackgroundColor = Color.White;
-            webView21.Location = new Point(12, 81);
+            webView21.Location = new Point(12, 95);
             webView21.Name = "webView21";
-            webView21.Size = new Size(759, 452);
+            webView21.Size = new Size(759, 438);
             webView21.TabIndex = 3;
             webView21.ZoomFactor = 1D;
             // 
@@ -108,6 +109,7 @@
             // lbTitles
             // 
             lbTitles.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lbTitles.DrawMode = DrawMode.OwnerDrawFixed;
             lbTitles.FormattingEnabled = true;
             lbTitles.ItemHeight = 15;
             lbTitles.Location = new Point(255, 41);
@@ -116,6 +118,7 @@
             lbTitles.Size = new Size(435, 34);
             lbTitles.TabIndex = 10;
             lbTitles.SelectedIndexChanged += lbTitles_SelectedIndexChanged;
+            lbTitles.DrawItem += lbTitles_DrawItem;
             // 
             // tbFavorite
             // 
@@ -124,11 +127,22 @@
             tbFavorite.Size = new Size(156, 23);
             tbFavorite.TabIndex = 11;
             // 
+            // DeleteFavorite
+            // 
+            DeleteFavorite.Location = new Point(12, 66);
+            DeleteFavorite.Name = "DeleteFavorite";
+            DeleteFavorite.Size = new Size(89, 23);
+            DeleteFavorite.TabIndex = 12;
+            DeleteFavorite.Text = "DeleteFavorite";
+            DeleteFavorite.UseVisualStyleBackColor = true;
+            DeleteFavorite.Click += DeleteFavorite_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(780, 545);
+            Controls.Add(DeleteFavorite);
             Controls.Add(tbFavorite);
             Controls.Add(lbTitles);
             Controls.Add(Favorite);
@@ -156,5 +170,6 @@
         private Button Favorite;
         private ListBox lbTitles;
         private TextBox tbFavorite;
+        private Button DeleteFavorite;
     }
 }
