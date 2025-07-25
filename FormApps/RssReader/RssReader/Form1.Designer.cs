@@ -30,9 +30,9 @@
             Reload = new Button();
             cbUrl = new ComboBox();
             Favorite = new Button();
-            lbTitles = new ListBox();
             tbFavorite = new TextBox();
             DeleteFavorite = new Button();
+            lbTitles = new ListBox();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             SuspendLayout();
             // 
@@ -40,7 +40,7 @@
             // 
             btRssGet.Location = new Point(696, 12);
             btRssGet.Name = "btRssGet";
-            btRssGet.Size = new Size(75, 23);
+            btRssGet.Size = new Size(100, 23);
             btRssGet.TabIndex = 1;
             btRssGet.Text = "取得";
             btRssGet.UseVisualStyleBackColor = true;
@@ -52,9 +52,9 @@
             webView21.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             webView21.CreationProperties = null;
             webView21.DefaultBackgroundColor = Color.White;
-            webView21.Location = new Point(12, 95);
+            webView21.Location = new Point(139, 80);
             webView21.Name = "webView21";
-            webView21.Size = new Size(759, 438);
+            webView21.Size = new Size(657, 469);
             webView21.TabIndex = 3;
             webView21.ZoomFactor = 1D;
             // 
@@ -98,7 +98,7 @@
             // 
             // Favorite
             // 
-            Favorite.Location = new Point(12, 41);
+            Favorite.Location = new Point(174, 40);
             Favorite.Name = "Favorite";
             Favorite.Size = new Size(75, 23);
             Favorite.TabIndex = 9;
@@ -106,30 +106,16 @@
             Favorite.UseVisualStyleBackColor = true;
             Favorite.Click += Favorite_Click;
             // 
-            // lbTitles
-            // 
-            lbTitles.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lbTitles.DrawMode = DrawMode.OwnerDrawFixed;
-            lbTitles.FormattingEnabled = true;
-            lbTitles.ItemHeight = 15;
-            lbTitles.Location = new Point(255, 41);
-            lbTitles.Name = "lbTitles";
-            lbTitles.RightToLeft = RightToLeft.No;
-            lbTitles.Size = new Size(435, 34);
-            lbTitles.TabIndex = 10;
-            lbTitles.SelectedIndexChanged += lbTitles_SelectedIndexChanged;
-            lbTitles.DrawItem += lbTitles_DrawItem;
-            // 
             // tbFavorite
             // 
-            tbFavorite.Location = new Point(93, 41);
+            tbFavorite.Location = new Point(255, 41);
             tbFavorite.Name = "tbFavorite";
-            tbFavorite.Size = new Size(156, 23);
+            tbFavorite.Size = new Size(435, 23);
             tbFavorite.TabIndex = 11;
             // 
             // DeleteFavorite
             // 
-            DeleteFavorite.Location = new Point(12, 66);
+            DeleteFavorite.Location = new Point(79, 41);
             DeleteFavorite.Name = "DeleteFavorite";
             DeleteFavorite.Size = new Size(89, 23);
             DeleteFavorite.TabIndex = 12;
@@ -137,11 +123,25 @@
             DeleteFavorite.UseVisualStyleBackColor = true;
             DeleteFavorite.Click += DeleteFavorite_Click;
             // 
+            // lbTitles
+            // 
+            lbTitles.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            lbTitles.DrawMode = DrawMode.OwnerDrawFixed;
+            lbTitles.FormattingEnabled = true;
+            lbTitles.ItemHeight = 15;
+            lbTitles.Location = new Point(12, 80);
+            lbTitles.Name = "lbTitles";
+            lbTitles.RightToLeft = RightToLeft.No;
+            lbTitles.Size = new Size(121, 469);
+            lbTitles.TabIndex = 10;
+            lbTitles.DrawItem += lbTitles_DrawItem;
+            lbTitles.SelectedIndexChanged += lbTitles_SelectedIndexChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(780, 545);
+            ClientSize = new Size(805, 559);
             Controls.Add(DeleteFavorite);
             Controls.Add(tbFavorite);
             Controls.Add(lbTitles);
@@ -168,8 +168,8 @@
         private Button Reload;
         private ComboBox cbUrl;
         private Button Favorite;
-        private ListBox lbTitles;
         private TextBox tbFavorite;
         private Button DeleteFavorite;
+        private ListBox lbTitles;
     }
 }

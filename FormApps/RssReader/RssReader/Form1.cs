@@ -8,6 +8,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RssReader {
     public partial class Form1 : Form {
+        string UrlPattern = @"https?://[\w!\?/\+\-_~=;\.,\*&@#\$%\(\)'\[\]]+";
 
         private List<ItemData> items;
         Dictionary<string, string> urls = new Dictionary<string, string> {
@@ -34,6 +35,8 @@ namespace RssReader {
                 string url;
                 if (urls.ContainsKey(cbUrl.Text)) {
                     url = urls[cbUrl.Text];
+                } else if (UserUrls.ContainsKey(cbUrl.Text)) {
+                    url = UserUrls[cbUrl.Text];
                 } else {
                     url = cbUrl.Text;
                 }
@@ -48,16 +51,17 @@ namespace RssReader {
 
                     lbTitles.Items.Clear();
                     items.ForEach(item => lbTitles.Items.Add(item.Title));
-                    //  cbUrl.DataSource=urls.Select(x=>x.Key).ToList();
+                    
                 }
             }
-            catch (Exception ex) {
+            catch (Exception) {
                 try {
                     webView21.Source = new Uri(cbUrl.Text);
                 }
-                catch (Exception) {
+                catch (Exception ex) {
+                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 
@@ -78,27 +82,36 @@ namespace RssReader {
         }
 
         private void Favorite_Click(object sender, EventArgs e) {
-
-
             try {
+                string name = tbFavorite.Text;
+                string url;
 
-               
-                
-                
-                        //UserUrls.Add(tbFavorite.Text, items.Select());
-                        //cbUrl.Items.Add(UserUrls.Keys.Last());
-                    
-                
+                if (string.IsNullOrWhiteSpace(name)) {
+                    MessageBox.Show("お気に入りの名前を入力してください。");
+                    return;
+                }
 
+                if (urls.ContainsKey(cbUrl.Text)) {
+                    url = urls[cbUrl.Text];
+                } else {
+                    url = cbUrl.Text;
+                }
+
+                if (!UserUrls.ContainsKey(name)) {
+                    UserUrls.Add(name, url);
+                    cbUrl.Items.Add(name);
+                } else {
+                    MessageBox.Show("その名前は既に登録されています。");
+                }
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void DeleteFavorite_Click(object sender, EventArgs e) {
             try {
-               
+
                 cbUrl.Items.Remove(UserUrls.Keys.Last());
             }
             catch (Exception ex) {
@@ -174,5 +187,6 @@ namespace RssReader {
             e.Graphics.DrawString(txt, fnt, bsh, bnd);
         }
 
+      
     }
 }
