@@ -1,5 +1,6 @@
 ﻿    using System.Text;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -18,12 +19,18 @@ namespace SampleApplication {
             InitializeComponent();
         }
 
-        //private void cancelButton_Click(object sender, RoutedEventArgs e) {
-        //    MessageBox.Show("キャンセルされました");
-        //}
+        private void seasonComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            seasonTextBlock.Text = (string)((ComboBoxItem)(seasonComboBox.SelectedItem)).Content;
+        }
+        private void colorRadioButton_Checked(object sender, RoutedEventArgs e) {
+            colorText.Text = (string)((RadioButton)(sender)).Content;
+        }
 
-        //private void okButton_Click(object sender, RoutedEventArgs e) {
-        //    MessageBox.Show(string.Format("入力された文字は{0}です、",messageTextBox.Text));
-        //}
+        private void checkBox_Checked(object sender, RoutedEventArgs e) {
+            checkBoxTextBlock.Text = "ON";
+        }
+        private void checkBox_Unchecked(object sender, RoutedEventArgs e) {
+            checkBoxTextBlock.Text = "OFF";
+        }
     }
 }
