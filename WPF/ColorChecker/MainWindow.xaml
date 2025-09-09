@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>   
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -44,9 +44,19 @@ Text="{Binding  ElementName=rSlider,Path=Value,Mode=TwoWay, UpdateSourceTrigger=
             <Slider x:Name="bSlider" Grid.Row="2" Maximum="255" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="160" ValueChanged="Slider_ValueChanged"/>
             <TextBox x:Name="bValue" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" FontSize="20" TextAlignment="Right"
                 Text="{Binding  ElementName=bSlider,Path=Value,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            
-            <ComboBox x:Name="colorSelectComboBox" HorizontalAlignment="Center" Margin="0,62,0,0" Grid.Row="3" VerticalAlignment="Top" Width="247" Grid.Column="1"/>
 
+            <ComboBox x:Name="colorSelectComboBox"  ItemsSource="{Binding}"  SelectedValue="{Binding Color}"  Margin="5,30,0,0" Grid.Row="3" Grid.Column="1" Height="24" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="155" SelectionChanged="colorSelectComboBox_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="80" Height="Auto" Margin="5,0" BorderThickness="1" BorderBrush="LightGray" >
+                            <Border.Background>
+                                <SolidColorBrush Color="{Binding Color}"/>
+                            </Border.Background>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </Border>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </Grid>
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
