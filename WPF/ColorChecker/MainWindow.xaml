@@ -64,7 +64,7 @@ Text="{Binding  ElementName=rSlider,Path=Value,Mode=TwoWay, UpdateSourceTrigger=
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <Button x:Name="stockButton_Button" Content="STOCK" HorizontalAlignment="Center" VerticalAlignment="Center" Width="247" Click="stockButton_Button_Click"/>
-            <ListBox x:Name="stockList" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+            <ListBox x:Name="stockList" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="stockList_SelectionChanged"/>
 
         </Grid>
 

@@ -23,7 +23,7 @@ namespace ColorChecker {
 
         public MainWindow() {
             InitializeComponent();
-            
+
             DataContext = GetColorList();
         }
         private MyColor[] GetColorList() {
@@ -31,24 +31,37 @@ namespace ColorChecker {
                 .Select(i => new MyColor() { Color = (Color)i.GetValue(null), Name = i.Name }).ToArray();
         }
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            var myColor = new MyColor() { Color=Color.FromRgb((byte)rSlider.Value,(byte)gSlider.Value, (byte)bSlider.Value)};
+            var myColor = new MyColor() { Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value) };
             colorArea.Background = new SolidColorBrush(myColor.Color);
         }
 
         private void stockButton_Button_Click(object sender, RoutedEventArgs e) {
+            if (colorArea.Background is SolidColorBrush brush) {
+                var color = brush.Color;
+                currentColor = new MyColor() {
+                    Color = color,
+                    Name = $"R: {color.R} G: {color.G} B: {color.B}"
+                };
+            }
             stockList.Items.Insert(0, currentColor);/***********************************/
+           
         }
 
         private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var comboSelectMyColor = (MyColor)((ComboBox)sender).SelectedItem;
             setSliderValue(comboSelectMyColor.Color);
-          
+
         }
 
         private void setSliderValue(Color color) {
             rSlider.Value = color.R;
             gSlider.Value = color.G;
             bSlider.Value = color.B;
+        }
+
+        private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var StockSelectMyColor = (MyColor)((stockList)).SelectedItem;
+            setSliderValue(StockSelectMyColor.Color);
         }
     }
 }
