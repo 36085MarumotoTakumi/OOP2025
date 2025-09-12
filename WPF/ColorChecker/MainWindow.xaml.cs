@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Security.Cryptography.X509Certificates;
+using System.ComponentModel;
 
 namespace ColorChecker {
     /// <summary>
@@ -37,15 +40,28 @@ namespace ColorChecker {
 
         private void stockButton_Button_Click(object sender, RoutedEventArgs e) {
             if (colorArea.Background is SolidColorBrush brush) {
-                var color = brush.Color;
-                currentColor = new MyColor() {
-                    Color = color,
-                    Name = $"R: {color.R} G: {color.G} B: {color.B}"
-                };
+                Color color = brush.Color;
+                var predefinedColors = GetColorList();
+                var matchedColor = predefinedColors.FirstOrDefault(c => c.Color.Equals(color));
+                if (matchedColor == null) {
+                    currentColor = new MyColor() {
+                        Color = color,
+                        Name = $"R: {color.R} G: {color.G} B: {color.B}"
+                    };
+                } else {
+                    currentColor = new MyColor() {
+                        Color = color,
+                        Name = matchedColor.Name
+                    };
+                }
             }
-            stockList.Items.Insert(0, currentColor);/***********************************/
-           
+            if (!stockList.Items.Cast<MyColor>().Any(c => c.Color == currentColor.Color)) {
+                stockList.Items.Insert(0, currentColor);
+            } else {
+                MessageBox.Show("既に登録済みです", "", MessageBoxButton.OK,MessageBoxImage.Warning);
+            }
         }
+
 
         private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var comboSelectMyColor = (MyColor)((ComboBox)sender).SelectedItem;
@@ -60,7 +76,7 @@ namespace ColorChecker {
         }
 
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var StockSelectMyColor = (MyColor)((stockList)).SelectedItem;
+            var StockSelectMyColor = (MyColor)stockList.SelectedItem;
             setSliderValue(StockSelectMyColor.Color);
         }
     }
