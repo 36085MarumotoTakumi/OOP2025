@@ -22,8 +22,6 @@ namespace HelloWorld {
         public string GreetingMessage {
             get => _greetingMessage;
             set => SetProperty(ref _greetingMessage, value);        
-
-
             }
         //    {
         //    if (_greetingMessage != value) {
@@ -41,7 +39,6 @@ namespace HelloWorld {
         public string NewMessage1 { get; } = "I will kill you";
         public string NewMessage2 { get; } = "You asshole";
         public DelegateCommand<string> ChangeMessageCommand { get; }
-
         //public event PropertyChangedEventHandler? PropertyChanged;
     }
 }
