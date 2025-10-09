@@ -7,51 +7,45 @@ using System.Windows.Input;
 using Prism.Mvvm;
 
 namespace SampleUnitConverter {
-    internal class MainWindowViewModel : ViewModel {
+    internal class MainWindowViewModel : BindableBase {
 
-        //フィールド
+        // フィールド
         private double metricValue;
         private double imperialValue;
 
-        //▲で呼ばれるコマンド
+        // ▲で呼ばれるコマンド
         public ICommand ImperialUnitToMetric { get; private set; }
-        //▼で呼ばれるコマンド
+
+        // ▼で呼ばれるコマンド
         public ICommand MetricToImperialUnit { get; private set; }
 
-        //上のComboBoxで選択されている値
+        // 上のComboBoxで選択されている値
         public MetricUnit CurrentMetricUnit { get; set; }
-        //下のComboBoxで選択されている値
+
+        // 下のComboBoxで選択されている値
         public ImperialUnit CurrentImperialUnit { get; set; }
 
-        //プロパティ
+        // プロパティ
         public double MetricValue {
             get => metricValue;
-            set {
-                this.metricValue = value;
-                this.OnPropertyChanged();
-            }
+            set => SetProperty(ref metricValue, value);
         }
 
         public double ImperialValue {
             get => imperialValue;
-            set {
-                this.imperialValue = value;
-                this.OnPropertyChanged();
-            }
+            set => SetProperty(ref imperialValue, value);
         }
 
+        // コンストラクタ
         public MainWindowViewModel() {
             CurrentMetricUnit = MetricUnit.Units.First();
             CurrentImperialUnit = ImperialUnit.Units.First();
 
             ImperialUnitToMetric = new DelegateCommand(
-                () => MetricValue =
-                    CurrentMetricUnit.FromImperialUnit(CurrentImperialUnit, ImperialValue));
+                () => MetricValue = CurrentMetricUnit.FromImperialUnit(CurrentImperialUnit, ImperialValue));
 
             MetricToImperialUnit = new DelegateCommand(
-                () => ImperialValue =
-                     CurrentImperialUnit.FromMetricUnit(CurrentMetricUnit, MetricValue));
-
+                () => ImperialValue = CurrentImperialUnit.FromMetricUnit(CurrentMetricUnit, MetricValue));
         }
     }
 }
