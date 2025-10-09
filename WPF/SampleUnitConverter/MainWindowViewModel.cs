@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Prism.Mvvm;
 
 namespace SampleUnitConverter {
     internal class MainWindowViewModel : ViewModel {
@@ -15,7 +16,7 @@ namespace SampleUnitConverter {
         //▲で呼ばれるコマンド
         public ICommand ImperialUnitToMetric { get; private set; }
         //▼で呼ばれるコマンド
-        public ICommand MetricToImperialunit { get; private set; }
+        public ICommand MetricToImperialUnit { get; private set; }
 
         //上のComboBoxで選択されている値
         public MetricUnit CurrentMetricUnit { get; set; }
@@ -40,12 +41,14 @@ namespace SampleUnitConverter {
         }
 
         public MainWindowViewModel() {
+            CurrentMetricUnit = MetricUnit.Units.First();
+            CurrentImperialUnit = ImperialUnit.Units.First();
 
             ImperialUnitToMetric = new DelegateCommand(
                 () => MetricValue =
                     CurrentMetricUnit.FromImperialUnit(CurrentImperialUnit, ImperialValue));
 
-            MetricToImperialunit = new DelegateCommand(
+            MetricToImperialUnit = new DelegateCommand(
                 () => ImperialValue =
                      CurrentImperialUnit.FromMetricUnit(CurrentMetricUnit, MetricValue));
 
