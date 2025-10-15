@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using Sample.Data;
+using SQLite;
+using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,15 +17,40 @@ namespace Sample {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+        private ObservableCollection<Person> _persons = new ObservableCollection<Person>();
+
         public MainWindow() {
             InitializeComponent();
+            _persons.Add(new Person { Id=1,Name="aaaaax",Phone="123456"});
+            //ReadDatabase();
+            PersonListView.ItemsSource = _persons;
         }
-
+        private void ReadDatabase() {
+            using (var connection = new SQLiteConnection(App.databasePath)) {
+                connection.CreateTable<Person>();
+                //_persons = connection.Table<Person>().ToList();
+            }
+        }
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
             var person = new Person() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
             };
+
+            using (var connection = new SQLiteConnection(App.databasePath)) {
+                connection.CreateTable<Person>();
+                connection.Insert(person);
+            }
+        }
+
+        private void ReadButton_Click(object sender, RoutedEventArgs e) {
+
+            using (var connection = new SQLiteConnection(App.databasePath)) {
+                connection.CreateTable<Person>();
+                var persons = connection.Table<Person>().ToList();
+            }
+            _persons.Add(new Person { Id = 1, Name = "aaaaax", Phone = "123456" });
+            //ReadDatabase();
         }
     }
 }
