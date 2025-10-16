@@ -1,4 +1,4 @@
-﻿using Sample.Data;
+﻿using CustomerApp.Data;
 using SQLite;
 using System;
 using System.Collections.ObjectModel;
@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Sample {
+namespace CustomerApp {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
