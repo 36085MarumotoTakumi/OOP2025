@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CustomerApp.Data {
     internal class Customer {
         [PrimaryKey, AutoIncrement]
-        public int id { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// 名前
         /// </summary>

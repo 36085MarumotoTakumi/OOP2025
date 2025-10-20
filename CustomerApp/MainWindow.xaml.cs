@@ -1,4 +1,5 @@
 ﻿using CustomerApp.Data;
+using Microsoft.Win32;
 using SQLite;
 using System;
 using System.Collections.ObjectModel;
@@ -18,7 +19,7 @@ namespace CustomerApp {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private List<Person> _persons = new List<Person>();
+        private List<Customer> _persons = new List<Customer>();
 
         public MainWindow() {
             InitializeComponent();
@@ -28,18 +29,19 @@ namespace CustomerApp {
         }
         private void ReadDatabase() {
             using (var connection = new SQLiteConnection(App.databasePath)) {
-                connection.CreateTable<Person>();
-                _persons = connection.Table<Person>().ToList();
+                connection.CreateTable<Customer>();
+                _persons = connection.Table<Customer>().ToList();
             }
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
-            var person = new Person() {
+            var person = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
+                Address = AddressTextBox.Text,
             };
 
             using (var connection = new SQLiteConnection(App.databasePath)) {
-                connection.CreateTable<Person>();
+                connection.CreateTable<Customer>();
                 connection.Insert(person);
             }
             ReadDatabase();
@@ -52,9 +54,9 @@ namespace CustomerApp {
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            var item = PersonListView.SelectedItem as Person;
+            var item = PersonListView.SelectedItem as Customer;
             using (var connection = new SQLiteConnection(App.databasePath)) {
-                connection.CreateTable<Person>();
+                connection.CreateTable<Customer>();
                 if (item != null) {
                     connection.Delete(item);
                 } else {
@@ -71,21 +73,23 @@ namespace CustomerApp {
 
         }
         private void PersonListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var items = PersonListView.SelectedItems as Person;
+            var items = PersonListView.SelectedItems as Customer;
             NameTextBox.Text = items?.Name;
             PhoneTextBox.Text = items?.Phone;
+            AddressTextBox.Text = items?.Address;
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
-            var items = PersonListView.SelectedItem as Person;
+            var items = PersonListView.SelectedItem as Customer;
             if (items is null) return;
             using (var connection = new SQLiteConnection(App.databasePath)) {
-                connection.CreateTable<Person>();
+                connection.CreateTable<Customer>();
 
-                var person = new Person() {
-                    Id = (PersonListView.SelectedItem as Person).Id,
+                var person = new Customer() {
+                    Id = (PersonListView.SelectedItem as Customer).Id,
                     Name = NameTextBox.Text,
                     Phone = PhoneTextBox.Text,
+                    Address = AddressTextBox.Text,
                 };
                 connection.Update(person);
                 ReadDatabase();
@@ -94,7 +98,10 @@ namespace CustomerApp {
         }
 
         private void PictureButton_Click(object sender, RoutedEventArgs e) {
-
+           OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult) {
+                //Pictures.Image = Image.FromFile(ofdPicFileOpen.FileName);
+            }
         }
     }
 }

@@ -24,7 +24,8 @@
                             <TextBlock Text="{Binding Id}"/>
                             <TextBlock Text="{Binding Name}" FontSize="20"/>
                             <TextBlock Text="{Binding Phone}" Foreground="Blue"/>
-
+                            <TextBlock Text="{Binding Address}" Foreground="Red"/>
+                            
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
