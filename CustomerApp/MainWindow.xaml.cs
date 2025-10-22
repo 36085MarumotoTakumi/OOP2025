@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using SQLite;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,9 +23,9 @@ namespace CustomerApp {
         private List<Customer> _persons = new List<Customer>();
 
         public MainWindow() {
+
             InitializeComponent();
-            //_persons.Add(new Person { Id=1,Name="aaaaax",Phone="123456"});
-            //ReadDatabase();
+
             PersonListView.ItemsSource = _persons;
         }
         private void ReadDatabase() {
@@ -38,6 +39,7 @@ namespace CustomerApp {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
+                Picture = _selectedPictureBytes
             };
 
             using (var connection = new SQLiteConnection(App.databasePath)) {
@@ -90,6 +92,7 @@ namespace CustomerApp {
                     Name = NameTextBox.Text,
                     Phone = PhoneTextBox.Text,
                     Address = AddressTextBox.Text,
+
                 };
                 connection.Update(person);
                 ReadDatabase();
@@ -97,11 +100,14 @@ namespace CustomerApp {
             }
         }
 
+        private byte[] _selectedPictureBytes;
+
         private void PictureButton_Click(object sender, RoutedEventArgs e) {
-           OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == DialogResult) {
-                //Pictures.Image = Image.FromFile(ofdPicFileOpen.FileName);
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == true) {
+                _selectedPictureBytes = File.ReadAllBytes(ofd.FileName);
             }
         }
+
     }
 }
