@@ -36,6 +36,15 @@ namespace ColorChecker {
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             var myColor = new MyColor() { Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value) };
             colorArea.Background = new SolidColorBrush(myColor.Color);
+            var colorList = (MyColor[])DataContext;
+            var matchedColor = colorList.FirstOrDefault(c => c.Color.R == myColor.Color.R &&
+                                                             c.Color.G == myColor.Color.G &&
+                                                             c.Color.B == myColor.Color.B);
+            if (matchedColor != null) {
+                colorSelectComboBox.SelectedItem = matchedColor;
+            } else {
+                colorSelectComboBox.SelectedItem = null;
+            }
         }
 
         private void stockButton_Button_Click(object sender, RoutedEventArgs e) {
@@ -64,10 +73,12 @@ namespace ColorChecker {
 
 
         private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var comboSelectMyColor = (MyColor)((ComboBox)sender).SelectedItem;
-            setSliderValue(comboSelectMyColor.Color);
-
+            var comboBox = (ComboBox)sender;
+            if (comboBox.SelectedItem is MyColor comboSelectMyColor) {
+                setSliderValue(comboSelectMyColor.Color);
+            }
         }
+
 
         private void setSliderValue(Color color) {
             rSlider.Value = color.R;

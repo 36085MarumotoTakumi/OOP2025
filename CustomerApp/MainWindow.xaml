@@ -5,47 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="顧客管理アプリケーション" Height="450" Width="800">
-    <Grid>
+        Title="顧客管理アプリケーション" Height="402" Width="800">
+    <Grid Margin="10,10,10,-6">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="389*"/>
-            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- 左側：入力フォーム -->
+        <StackPanel Grid.Column="0" Margin="10,10,10,0" Height="327" VerticalAlignment="Top">
+            <TextBlock Text="名前" />
+            <TextBox x:Name="NameTextBox" Height="30" Margin="0,5"/>
 
-        <StackPanel Margin="10,0,328,0" VerticalAlignment="Center">
-            <TextBox x:Name="NameTextBox" Height="30" Width="300" HorizontalAlignment="Left" Margin="0,5"/>
-            <TextBox x:Name="PhoneTextBox" Height="30" Width="300" HorizontalAlignment="Left" Margin="0,5"/>
-            <TextBox x:Name="AddressTextBox" Height="30" Width="300" HorizontalAlignment="Left" Margin="0,5"/>
+            <TextBlock Text="電話番号" />
+            <TextBox x:Name="PhoneTextBox" Height="30" Margin="0,5"/>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
-                <Button Content="画像" x:Name="PictureButton" Click="PictureButton_Click" Height="30" Width="80" Margin="5"/>
-                <Button Content="更新" x:Name="UpdateButton" Click="UpdateButton_Click" Height="30" Width="80" Margin="5"/>
-                <Button Content="保存" x:Name="SaveButton" Click="SaveButton_Click" Height="30" Width="80" Margin="5"/>
-                <Button Content="取得" x:Name="ReadButton" Click="ReadButton_Click" Height="30" Width="80" Margin="5"/>
-                <Button Content="削除" x:Name="DeleteButton" Click="DeleteButton_Click" Height="30" Width="80" Margin="5"/>
+            <TextBlock Text="住所" />
+            <TextBox x:Name="AddressTextBox" Height="30" Margin="0,5"/>
+            <StackPanel Orientation="Vertical" Width="270">
+                <Image x:Name="Picture" Source="{Binding Picture}" Height="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Width="270">
+                <Button Content="画像" x:Name="PictureButton" Click="PictureButton_Click" Width="80" Margin="5"/>
+                <Button Content="更新" x:Name="UpdateButton" Click="UpdateButton_Click" Width="80" Margin="5"/>
+                <Button Content="保存" x:Name="SaveButton" Click="SaveButton_Click" Width="80" Margin="5"/>
+                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Width="270">
+                <Button Content="取得" x:Name="ReadButton" Click="ReadButton_Click" Width="80" Margin="5"/>
+                <Button Content="削除" x:Name="DeleteButton" Click="DeleteButton_Click" Width="80" Margin="5"/>
+            </StackPanel>
             </StackPanel>
 
+        <!-- 右側：検索とリストビュー -->
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="検索" />
+            <TextBox x:Name="SearchTextBox" FontSize="16" Height="30" Margin="0,0,0,10"
+                     TextChanged="SearchTextBox_TextChanged"  />
 
+            <ListView x:Name="PersonListView" SelectionChanged="PersonListView_SelectionChanged" Height="271">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5">
+                            <TextBlock Text="{Binding Name}" FontSize="16"/>
+                            <TextBlock Text="{Binding Phone}" Foreground="Blue"/>
+                            <TextBlock Text="{Binding Address}" Foreground="Red"/>
+                            <Image Source="{Binding Picture}" Height="50" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
-        <TextBox x:Name="SearchTextBox"  Grid.Row="0" FontSize="16" TextChanged="SearchTextBox_TextChanged" Height="30" Width="323" Margin="0,6,0,144" HorizontalAlignment="Right"/>
-        <!-- リストビューエリア -->
-        <ListView x:Name="PersonListView" Grid.Row="0" Height="250" SelectionChanged="PersonListView_SelectionChanged" Margin="455,3,10,105" Grid.RowSpan="3" Grid.ColumnSpan="3">
-
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Width="210">
-                        <TextBlock Text="{Binding Name}" FontSize="16"/>
-                        <TextBlock Text="{Binding Phone}" Foreground="Blue"/>
-                        <TextBlock Text="{Binding Address}" Foreground="Red"/>
-                        <Image Source="{Binding Picture}" Height="50" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
     </Grid>
 </Window>
