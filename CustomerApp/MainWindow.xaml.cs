@@ -79,6 +79,7 @@ namespace CustomerApp {
             NameTextBox.Text = items?.Name;
             PhoneTextBox.Text = items?.Phone;
             AddressTextBox.Text = items?.Address;
+            //PictureBox.Source = items?.Picture;
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
@@ -105,6 +106,7 @@ namespace CustomerApp {
         private void PictureButton_Click(object sender, RoutedEventArgs e) {
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() == true) {
+                PictureBox.Source = new BitmapImage(new Uri(ofd.FileName));
                 _selectedPictureBytes = File.ReadAllBytes(ofd.FileName);
             }
         }
