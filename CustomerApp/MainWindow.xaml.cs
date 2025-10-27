@@ -4,6 +4,7 @@ using SQLite;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +27,7 @@ namespace CustomerApp {
 
             InitializeComponent();
 
+            ReadDatabase();
             PersonListView.ItemsSource = _persons;
         }
         private void ReadDatabase() {
@@ -111,5 +113,11 @@ namespace CustomerApp {
             }
         }
 
+        private void PostCodeButton_Click(object sender, RoutedEventArgs e) {
+            //using (WebClient webClient = new WebClient()) {
+            //    string str = webClient.DownloadString("https://jp-postal-code-api.ttskch.com/api/v1/1000014.json");
+            //    AddressTextBox.Text=str.
+            //}
+        }
     }
 }
