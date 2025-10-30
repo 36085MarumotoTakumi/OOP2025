@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,12 +13,22 @@ namespace Section03 {
 
         private async void button1_Click(object sender, EventArgs e) {
             toolStripStatusLabel2.Text = "";
-            await Task.Run(() => DoLongTimeWork());
-            toolStripStatusLabel1.Text = "終了";
+            var elapsed = await DoLongTimeWorkAsync(4000);
+            toolStripStatusLabel2.Text = $"{elapsed}";
         }
 
-        private void DoLongTimeWork() {
-            System.Threading.Thread.Sleep(5000);
+        private async Task<long> DoLongTimeWorkAsync(int milliseconds) {
+            var sw = new Stopwatch();
+            await Task.Run(() => {
+                System.Threading.Thread.Sleep(milliseconds);
+            });
+            sw.Stop();
+            return sw.ElapsedMilliseconds;
+        }
+
+        //戻り値のある同期メソッド
+        private async Task DoLongTimeWork() {
+            
         }
 
         private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
