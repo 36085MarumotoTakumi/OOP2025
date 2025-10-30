@@ -95,9 +95,9 @@ namespace Exercise01 {
                         b.Title,
                         b.PublishedYear,
                     })
-                .GroupBy(x=>x.PublishedYear)
+                .GroupBy(x => x.PublishedYear)
                 .OrderBy(x => x.Key);
-                ;
+            ;
             foreach (var book in books) {
                 Console.WriteLine($"# {book.Key}");
                 foreach (var item in book) {
@@ -108,7 +108,20 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_8() {
+            var groups = Library.Categories
+                             .GroupJoin(Library.Books
+                             , c => c.Id
+                             , b => b.PublishedYear,
+                             (c, books) => new {
+                                 CategoryName = c.Name,
+                                 Count = books.Count(),
+                             }).Where(x=>x.Count>=4)
+                             .Select(x=>x.CategoryName);
 
+            foreach (var name in groups) {
+                Console.WriteLine(name);
+                }
+            }
         }
     }
-}
+
