@@ -199,6 +199,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise01", "Chapter14\演
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Section04", "Chapter14\Section04\Section04.csproj", "{5EF4945C-4186-4661-B516-E52EAEEDDDB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBrowser", "Chapter14\WebBrowser\WebBrowser.csproj", "{6742A757-EBDA-48EE-AEDD-F82518DD78DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -473,6 +475,10 @@ Global
 		{5EF4945C-4186-4661-B516-E52EAEEDDDB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EF4945C-4186-4661-B516-E52EAEEDDDB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EF4945C-4186-4661-B516-E52EAEEDDDB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6742A757-EBDA-48EE-AEDD-F82518DD78DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6742A757-EBDA-48EE-AEDD-F82518DD78DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6742A757-EBDA-48EE-AEDD-F82518DD78DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6742A757-EBDA-48EE-AEDD-F82518DD78DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -558,6 +564,7 @@ Global
 		{FEAE70BD-08B4-42CB-BDB6-050370256BCE} = {A23E64D5-C1CA-43DA-828C-2EAD108F42BB}
 		{CFB4C738-A962-410A-B378-77BAF9352FD7} = {FEAE70BD-08B4-42CB-BDB6-050370256BCE}
 		{5EF4945C-4186-4661-B516-E52EAEEDDDB0} = {A23E64D5-C1CA-43DA-828C-2EAD108F42BB}
+		{6742A757-EBDA-48EE-AEDD-F82518DD78DB} = {A23E64D5-C1CA-43DA-828C-2EAD108F42BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {272591D5-063F-49AB-8679-BAA2946B1211}
