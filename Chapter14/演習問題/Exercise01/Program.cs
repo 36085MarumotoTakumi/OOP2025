@@ -1,20 +1,14 @@
-﻿
-
-using System.Diagnostics;
-using System.IO;
-using System.Reflection.PortableExecutable;
-using System.Text;
-
 namespace Exercise01 {
-    internal class Program {
-        static async Task Main(string[] args) {
-            Console.WriteLine("^^");
-            Console.ReadLine();
-            using (var reader = new System.IO.StreamReader("./走れメロス.txt")) {
-                var elapsed = await reader.ReadToEndAsync();
-                Console.WriteLine(elapsed);
-            }
+    internal static class Program {
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main() {
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Form1());
         }
-      
     }
 }
