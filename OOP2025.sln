@@ -211,6 +211,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "演習問題", "演習問�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise01", "Chapter10\演習問題\Exercise01\Exercise01.csproj", "{B706E70C-5038-4058-A385-B6100954927E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter15", "Chapter15", "{07DD71A8-17B7-4EAE-AAA2-9D954761323F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "演習問題", "演習問題", "{AA2760AD-5CBF-4128-B908-0F587683AB47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Section01", "Chapter15\Section01\Section01.csproj", "{07E71F63-EF54-4F6F-8DCE-61BDF0510499}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{07AE48AB-8C77-4B75-B7DB-20DCF5F836D7}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -501,6 +512,10 @@ Global
 		{B706E70C-5038-4058-A385-B6100954927E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B706E70C-5038-4058-A385-B6100954927E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B706E70C-5038-4058-A385-B6100954927E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07E71F63-EF54-4F6F-8DCE-61BDF0510499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E71F63-EF54-4F6F-8DCE-61BDF0510499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E71F63-EF54-4F6F-8DCE-61BDF0510499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E71F63-EF54-4F6F-8DCE-61BDF0510499}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -591,6 +606,8 @@ Global
 		{E0FB20DE-D252-406E-9508-B319C10AB393} = {BF41EA58-CFB6-483C-91B8-550190CA0CAE}
 		{E1FED199-151D-40E4-8E2A-86AE88EBDFE1} = {BF41EA58-CFB6-483C-91B8-550190CA0CAE}
 		{B706E70C-5038-4058-A385-B6100954927E} = {E1FED199-151D-40E4-8E2A-86AE88EBDFE1}
+		{AA2760AD-5CBF-4128-B908-0F587683AB47} = {07DD71A8-17B7-4EAE-AAA2-9D954761323F}
+		{07E71F63-EF54-4F6F-8DCE-61BDF0510499} = {07DD71A8-17B7-4EAE-AAA2-9D954761323F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {272591D5-063F-49AB-8679-BAA2946B1211}
