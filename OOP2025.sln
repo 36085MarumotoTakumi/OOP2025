@@ -222,6 +222,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TemplateMethod", "TemplateMethod", "{94DCA81B-CC69-423F-901E-4F9165C1EC5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFileProcessor", "Chapter15\TemplateMethod\TextFileProcessor\TextFileProcessor.csproj", "{455C2660-6FFE-479B-9021-7E5F12E078BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -516,6 +520,10 @@ Global
 		{07E71F63-EF54-4F6F-8DCE-61BDF0510499}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07E71F63-EF54-4F6F-8DCE-61BDF0510499}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07E71F63-EF54-4F6F-8DCE-61BDF0510499}.Release|Any CPU.Build.0 = Release|Any CPU
+		{455C2660-6FFE-479B-9021-7E5F12E078BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{455C2660-6FFE-479B-9021-7E5F12E078BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{455C2660-6FFE-479B-9021-7E5F12E078BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{455C2660-6FFE-479B-9021-7E5F12E078BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -608,6 +616,8 @@ Global
 		{B706E70C-5038-4058-A385-B6100954927E} = {E1FED199-151D-40E4-8E2A-86AE88EBDFE1}
 		{AA2760AD-5CBF-4128-B908-0F587683AB47} = {07DD71A8-17B7-4EAE-AAA2-9D954761323F}
 		{07E71F63-EF54-4F6F-8DCE-61BDF0510499} = {07DD71A8-17B7-4EAE-AAA2-9D954761323F}
+		{94DCA81B-CC69-423F-901E-4F9165C1EC5D} = {07DD71A8-17B7-4EAE-AAA2-9D954761323F}
+		{455C2660-6FFE-479B-9021-7E5F12E078BC} = {94DCA81B-CC69-423F-901E-4F9165C1EC5D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {272591D5-063F-49AB-8679-BAA2946B1211}
