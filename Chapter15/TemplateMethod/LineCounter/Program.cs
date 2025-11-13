@@ -3,11 +3,16 @@
 
 namespace LineCounter {
     internal class Program {
-        
-        static void Main(string[] args){
-            string path=@"C:\\Users\\infosys\\source\\repos\\OOP2025\\Chapter06\\Section03\\Program.cs";
-            TextProcessor.Run<LineCounterProcessor>(path);
-            
+
+        static void Main(string[] args) {
+            try {
+                Console.WriteLine("ファイルパスを入力してください");
+                var path = Console.ReadLine();
+                TextProcessor.Run<LineCounterProcessor>(path);
+            }
+            catch (Exception) {
+                Console.WriteLine("ファイルが見つかりません");
+            }
         }
     }
 }
