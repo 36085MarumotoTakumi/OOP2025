@@ -7,15 +7,21 @@ using System.Threading.Tasks;
 namespace TextFileProcessorDI {
     public class LineCounterService : ITextFileService {
         private int _count;
-
+        private string[]? _lines;
         public void Initialize(string fname) {
             _count = 0;
+
         }
         public void Execute(string line) {
             _count++;
+            if (_count<=20) {
+                Console.WriteLine(line);
+            }
         }
         public void Terminate() {
             Console.WriteLine($"{_count}行");
+
         }
+
     }
 }

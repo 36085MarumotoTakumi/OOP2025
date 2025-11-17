@@ -1,6 +1,6 @@
 ﻿namespace TextFileProcessorDI {
     internal class Program {
-        static void Main(string[] args) {
+        static void Main(string[] args)     {
             var service = new LineCounterService();
             var processor = new TextFileProcessor(service);
             Console.Write("パスの入力:");
