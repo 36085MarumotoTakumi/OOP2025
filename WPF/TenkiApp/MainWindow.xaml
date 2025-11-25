@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Textual Weather" Height="650" Width="550"
+        Title="Textual Weather" Height="600" Width="1024"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         AllowsTransparency="True"
@@ -12,141 +12,305 @@
         FontFamily="Segoe UI Semibold">
 
     <Window.Resources>
-        <SolidColorBrush x:Key="MdSysColorBackground">#1C1B1F</SolidColorBrush>
-        <SolidColorBrush x:Key="MdSysColorSurface">#25232A</SolidColorBrush>
-        <SolidColorBrush x:Key="MdSysColorPrimaryContainer">#4F378B</SolidColorBrush>
-        <SolidColorBrush x:Key="MdSysColorOnPrimaryContainer">#EADDFF</SolidColorBrush>
-        <SolidColorBrush x:Key="MdSysColorOnSurface">#E6E1E5</SolidColorBrush>
-        <SolidColorBrush x:Key="MdSysColorOutline">#938F99</SolidColorBrush>
+        <SolidColorBrush x:Key="AppBackground">#1E222B</SolidColorBrush>
+        <SolidColorBrush x:Key="SidebarBackground">#232833</SolidColorBrush>
+        <SolidColorBrush x:Key="CardSurface">#2B313F</SolidColorBrush>
+        <SolidColorBrush x:Key="HeroCardBackground">#3A4253</SolidColorBrush>
+        <SolidColorBrush x:Key="TextPrimary">#FFFFFF</SolidColorBrush>
+        <SolidColorBrush x:Key="TextSecondary">#A0A7B6</SolidColorBrush>
+        <SolidColorBrush x:Key="AccentColor">#64B5F6</SolidColorBrush>
+        <SolidColorBrush x:Key="ScrollBarThumb">#50808080</SolidColorBrush>
+
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="Bg" SnapsToDevicePixels="true">
+                            <Track x:Name="PART_Track" IsEnabled="{TemplateBinding IsEnabled}">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static ScrollBar.LineUpCommand}" Opacity="0" Focusable="false"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static ScrollBar.LineDownCommand}" Opacity="0" Focusable="false"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="{x:Type Thumb}">
+                                                <Border Background="{StaticResource ScrollBarThumb}" CornerRadius="4"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Orientation" Value="Vertical">
+                                <Setter Property="Width" Value="8"/>
+                                <Setter Property="Height" Value="Auto"/>
+                                <Setter TargetName="PART_Track" Property="IsDirectionReversed" Value="true"/>
+                            </Trigger>
+                            <Trigger Property="Orientation" Value="Horizontal">
+                                <Setter Property="Width" Value="Auto"/>
+                                <Setter Property="Height" Value="8"/>
+                                <Setter TargetName="PART_Track" Property="IsDirectionReversed" Value="false"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="RepeatButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="Transparent" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
-    <Border Background="{StaticResource MdSysColorBackground}" 
-            CornerRadius="24" 
-            BorderBrush="{StaticResource MdSysColorOutline}" 
-            BorderThickness="0.5"
-            Padding="20">
-
+    <Border Background="{StaticResource AppBackground}" CornerRadius="20" BorderThickness="0">
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0" Margin="0,0,0,20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <TextBlock Text="TenkiApp" 
-                               FontSize="14" 
-                               Foreground="{StaticResource MdSysColorOutline}"/>
-
-                    <ComboBox x:Name="CboLocations"
-                              SelectionChanged="CboLocations_SelectionChanged"
-                              DisplayMemberPath="Name"
-                              FontSize="20"
-                              FontWeight="Bold"
-                              Foreground="{StaticResource MdSysColorBackground}"
-                              Background="Transparent"
-                              BorderThickness="0"
-                              Cursor="Hand"
-                              HorizontalAlignment="Left">
-                        <ComboBox.Resources>
-                            <Style TargetType="ComboBoxItem">
-                                <Setter Property="Background" Value="{StaticResource MdSysColorSurface}"/>
-                                <Setter Property="Foreground" Value="{StaticResource MdSysColorOnSurface}"/>
-                            </Style>
-                        </ComboBox.Resources>
-                    </ComboBox>
-                </StackPanel>
-
-                <Button Grid.Column="1" 
-                        Content="✕" 
-                        Click="CloseButton_Click"
-                        VerticalAlignment="Top"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Foreground="{StaticResource MdSysColorOnSurface}"
-                        FontSize="16"
-                        Cursor="Hand"/>
-            </Grid>
-
-            <Border Grid.Row="1" 
-                    Background="{StaticResource MdSysColorPrimaryContainer}" 
-                    CornerRadius="16" 
-                    Padding="20" 
-                    Margin="0,0,0,20">
+            <Border Grid.Column="0" Background="{StaticResource SidebarBackground}" CornerRadius="20,0,0,20" Padding="20">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock x:Name="TxtCityLabel" 
-                                   Text="Loading..." 
-                                   Foreground="{StaticResource MdSysColorOnPrimaryContainer}" 
-                                   Opacity="0.8" FontSize="14"/>
-                        <TextBlock x:Name="TxtCurrentWeather" 
-                                   Text="..." 
-                                   Foreground="{StaticResource MdSysColorOnPrimaryContainer}" 
-                                   FontSize="20" Margin="0,5,0,0"/>
+                    <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                        <TextBlock Text="TenkiApp" FontSize="14" Foreground="{StaticResource TextSecondary}" Margin="0,0,0,5"/>
+
+                        <Grid>
+                            <TextBlock Text="地域を入力してください"
+                                       FontSize="18"
+                                       Foreground="#60FFFFFF" 
+                                       VerticalAlignment="Center"
+                                       Margin="4,0,0,0"
+                                       IsHitTestVisible="False">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TxtLocationInput}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <TextBox x:Name="TxtLocationInput"
+                                     TextChanged="TxtLocationInput_TextChanged"
+                                     FontSize="18"
+                                     FontWeight="Bold"
+                                     Foreground="{StaticResource TextPrimary}"
+                                     Background="Transparent"
+                                     BorderBrush="#40FFFFFF"
+                                     BorderThickness="0,0,0,1"
+                                     Padding="2"
+                                     CaretBrush="{StaticResource AccentColor}"/>
+
+                            <ProgressBar x:Name="PbSearchLoading"
+                                         IsIndeterminate="True"
+                                         Height="2"
+                                         VerticalAlignment="Bottom"
+                                         Background="Transparent"
+                                         Foreground="{StaticResource AccentColor}"
+                                         Visibility="Collapsed"
+                                         BorderThickness="0"/>
+
+                            <Popup x:Name="PopupSuggestions" 
+                                   PlacementTarget="{Binding ElementName=TxtLocationInput}" 
+                                   Placement="Bottom"
+                                   StaysOpen="False"
+                                   AllowsTransparency="True">
+                                <Border Background="{StaticResource CardSurface}" CornerRadius="8" Padding="5" MinWidth="260" MaxHeight="200">
+                                    <ListBox x:Name="ListSuggestions" 
+                                             Background="Transparent" 
+                                             BorderThickness="0"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                             SelectionChanged="ListSuggestions_SelectionChanged">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Margin="5">
+                                                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource TextPrimary}" FontSize="16" FontWeight="Bold"/>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Admin1}" Foreground="{StaticResource TextSecondary}" FontSize="12" Margin="0,0,5,0"/>
+                                                        <TextBlock Text="{Binding Country}" Foreground="{StaticResource TextSecondary}" FontSize="12"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                        <ListBox.Resources>
+                                            <Style TargetType="ListBoxItem">
+                                                <Setter Property="Cursor" Value="Hand"/>
+                                                <Setter Property="Padding" Value="5"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ListBoxItem">
+                                                            <Border x:Name="Bd" Background="Transparent" CornerRadius="4">
+                                                                <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="Bd" Property="Background" Value="#30FFFFFF"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsSelected" Value="True">
+                                                                    <Setter TargetName="Bd" Property="Background" Value="{StaticResource AccentColor}"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListBox.Resources>
+                                    </ListBox>
+                                </Border>
+                            </Popup>
+                        </Grid>
                     </StackPanel>
 
-                    <TextBlock x:Name="TxtCurrentTemp" 
-                               Grid.Column="1" 
-                               Text="--°C" 
-                               Foreground="{StaticResource MdSysColorOnPrimaryContainer}" 
-                               FontSize="36" 
-                               VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="7日間予報" Foreground="{StaticResource TextPrimary}" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="ListForecastSidebar">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="Transparent" Padding="5,15" BorderBrush="#30FFFFFF" BorderThickness="0,0,0,0.5">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="60"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Grid.Column="0" Text="{Binding DayLabel}" Foreground="{StaticResource TextPrimary}" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding WeatherIcon}" 
+                                                           Foreground="{Binding IconColor}" 
+                                                           FontFamily="Segoe UI Emoji"
+                                                           FontSize="24" 
+                                                           VerticalAlignment="Center">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect ShadowDepth="0" BlurRadius="5" Color="Black" Opacity="0.5"/>
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                                <TextBlock Text="{Binding PopLabel}" Foreground="{StaticResource AccentColor}" FontSize="12" VerticalAlignment="Center" Margin="5,0,0,0" FontWeight="Bold"/>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding MaxTemp}" Foreground="{StaticResource TextPrimary}" FontSize="16" FontWeight="Bold"/>
+                                                <TextBlock Text="/" Foreground="{StaticResource TextSecondary}" FontSize="16" Margin="5,0"/>
+                                                <TextBlock Text="{Binding MinTemp}" Foreground="{StaticResource TextSecondary}" FontSize="16"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </Grid>
             </Border>
 
-            <Grid Grid.Row="2">
+            <Grid Grid.Column="1" Margin="30">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Hourly Forecast" 
-                           Foreground="{StaticResource MdSysColorOnSurface}" 
-                           FontSize="16" Margin="0,0,0,10"/>
+                <Button Grid.Row="0" Content="✕" Click="CloseButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent" BorderThickness="0" Foreground="{StaticResource TextSecondary}" FontSize="20" Cursor="Hand" Margin="0,-10,-10,0"/>
 
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                    <ItemsControl x:Name="ListForecast">
+                <Border Grid.Row="1" Background="{StaticResource HeroCardBackground}" CornerRadius="16" Padding="25" Margin="0,10,0,30">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                            <TextBlock x:Name="TxtCityLabel" Text="Loading..." Foreground="{StaticResource TextPrimary}" FontSize="28" FontWeight="Bold"/>
+                            <TextBlock Text="現在の天気" Foreground="{StaticResource TextSecondary}" FontSize="16" Margin="0,5,0,0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock x:Name="TxtCurrentWeatherIcon" 
+                                       Text="" 
+                                       Foreground="White" 
+                                       FontFamily="Segoe UI Emoji"
+                                       FontSize="48" 
+                                       Margin="0,0,15,0" 
+                                       VerticalAlignment="Center">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="0" BlurRadius="5" Color="Black" Opacity="0.5"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+
+                            <TextBlock x:Name="TxtCurrentTemp" Text="--°" Foreground="{StaticResource TextPrimary}" FontSize="64" FontWeight="Light" VerticalAlignment="Center"/>
+                            <StackPanel VerticalAlignment="Center" Margin="10,0,0,0">
+                                <TextBlock x:Name="TxtCurrentWeatherDescription" Text="..." Foreground="{StaticResource TextPrimary}" FontSize="18"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <TextBlock Grid.Row="2" Text="1時間ごとの予報" Foreground="{StaticResource TextPrimary}" FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                <ScrollViewer x:Name="ScrollHourly" 
+                              Grid.Row="3" 
+                              HorizontalScrollBarVisibility="Auto" 
+                              VerticalScrollBarVisibility="Disabled"
+                              PreviewMouseWheel="ScrollHourly_PreviewMouseWheel">
+                    <ItemsControl x:Name="ListForecastHorizontal">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="{StaticResource MdSysColorSurface}" 
-                                        CornerRadius="12" 
-                                        Padding="15" 
-                                        Margin="0,0,0,8">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
+                                <Border Background="{StaticResource CardSurface}" CornerRadius="12" Padding="15" Margin="0,0,10,15" Width="110">
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding TimeLabel}" Foreground="{StaticResource TextSecondary}" FontSize="14" HorizontalAlignment="Center" Margin="0,0,0,5"/>
 
-                                        <StackPanel Grid.Column="0">
-                                            <TextBlock Text="{Binding TimeLabel}" 
-                                                       Foreground="{StaticResource MdSysColorOnSurface}" 
-                                                       FontSize="16" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding WeatherDescription}" 
-                                                       Foreground="{StaticResource MdSysColorOnSurface}" 
-                                                       Opacity="0.7" FontSize="12"/>
+                                        <TextBlock Text="{Binding WeatherIcon}" 
+                                                   Foreground="{Binding IconColor}" 
+                                                   FontFamily="Segoe UI Emoji"
+                                                   FontSize="36" 
+                                                   Margin="0,5" 
+                                                   HorizontalAlignment="Center">
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect ShadowDepth="0" BlurRadius="5" Color="Black" Opacity="0.5"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
+
+                                        <TextBlock Text="{Binding Temperature, StringFormat={}{0}°}" Foreground="{StaticResource TextPrimary}" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2">
+                                            <TextBlock Text="💨" FontSize="12" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                                            <TextBlock Text="{Binding WindInfo}" Foreground="{StaticResource TextSecondary}" FontSize="12" VerticalAlignment="Center"/>
                                         </StackPanel>
 
-                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding Temperature}" 
-                                                       Foreground="{StaticResource MdSysColorOnSurface}" 
-                                                       FontSize="20" FontWeight="Bold"/>
-                                            <TextBlock Text="°C" 
-                                                       Foreground="{StaticResource MdSysColorOnSurface}" 
-                                                       FontSize="14" Margin="2,0,0,0" VerticalAlignment="Bottom"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2">
+                                            <TextBlock Text="☀️" FontSize="12" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                                            <TextBlock Text="{Binding UvInfo}" Foreground="{StaticResource TextSecondary}" FontSize="12" VerticalAlignment="Center"/>
                                         </StackPanel>
-                                    </Grid>
+                                    </StackPanel>
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
